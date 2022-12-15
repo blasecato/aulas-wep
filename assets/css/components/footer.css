@@ -1,0 +1,13 @@
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.Footer--title {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 45px;
+  color: #ffffff;
+}

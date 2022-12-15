@@ -1,0 +1,37 @@
+.Footer {
+  display: flex;
+  align-items: flex-start;
+	background: #536977;
+	padding: 90px 0px;
+  &--title {
+		font-family: $Raleway;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 45px;
+    color: #ffffff;
+  }
+	.container {
+		justify-content: space-between;
+		padding: 0 20px;
+	}
+	&__colum {
+		flex-direction: column;
+		display: flex;
+		align-items: flex-start;
+		height: 95px;
+		margin-top: 25px;
+		.item {
+			font-family: $Raleway;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 20px;
+			line-height: 150%;
+			color: #FFFFFF;
+			text-decoration: none;
+			&--email {
+				text-decoration: underline;
+			}
+		}
+	}
+}

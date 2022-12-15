@@ -1,0 +1,25 @@
+.Header {
+  background-color: #ffffff;
+  height: 132px;
+  padding: 0 20px;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.container .logo {
+  width: 151px;
+  height: 79px;
+}
+.container ul li a {
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 14px;
+  color: #162C3D;
+  text-decoration: none;
+  margin: 0 20px;
+}
