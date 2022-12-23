@@ -34,12 +34,12 @@
 					</a>
 					<ul>
 						<li>
-							<a href="./">Quiénes somos</a>
-							<a href="./">Qué hacemos</a>
-							<a href="./">Cómo lo hacemos</a>
-							<a href="./">Programas</a>
-							<a href="./">Recursos</a>
-							<a href="./">Contacto</a>
+							<a href="/about-us">Quiénes somos</a>
+							<a href="/we-make">Qué hacemos</a>
+							<a href="/how-we-do">Cómo lo hacemos</a>
+							<a href="/programs">Programas</a>
+							<a href="/">Recursos</a>
+							<a href="/">Contacto</a>
 						</li>
 					</ul>
 				</div>

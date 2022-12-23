@@ -1,0 +1,157 @@
+.howWeDo {
+  &__banner {
+		width: 100%;
+		height: 554px;
+		background-size: cover;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+  }
+	.section-we-promote {
+		background: #F5F5F5;
+		padding: 80px 20px;
+		&--grid {
+			display: grid;
+			grid-template-columns: 33% 33% 33%;
+			grid-template-rows: 440px 440px;
+		}
+		.container {
+			display: block;
+			.title {
+				font-family: $Raleway;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 38px;
+				line-height: 45px;
+				color: #719F59;
+				margin-bottom: 55px;
+			}
+		}
+	}
+	.section-program {
+		padding: 80px 20px;
+		padding-bottom: 140px;
+		background: #719F59;
+		border-top-left-radius: 25px;
+		border-top-right-radius: 25px;
+		&__title {
+			font-family: $Raleway;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 38px;
+			line-height: 45px;
+			text-align: center;
+			color: #FFFFFF;
+			margin-bottom: 40px;
+		}
+		.container {
+			display: block;
+		}
+		.list {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 46px;
+			.item {
+				width: 230px;
+				img {
+					width: 230px;
+					border-radius: 50%;
+					height: 230px;
+					margin-bottom: 32px;
+				}
+				p {
+					font-family: $Raleway;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 24px;
+					line-height: 28px;
+					text-align: center;
+					color: #162C3D;
+				}
+			}
+		}
+	}
+	.section-ped {
+		background: #EDEDED;
+		padding: 80px 40px;
+		width: 100%;
+		.container {
+			display: block;
+		}
+		.row {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.column {
+				width: 35%;
+				margin-top: 50px;
+				&--left {
+					width: 25%;
+				}
+				.button-item {
+					font-family: $Raleway;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 18px;
+					line-height: 150%;
+					color: #162C3D;
+					border: none;
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					text-align: left;
+					margin-bottom: 15px;
+					margin-left: 20px;
+					background-color: transparent;
+				}
+				&--center {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					img {
+						border-radius: 50%;
+						height: 244px;
+						width: 234px;
+						object-fit: cover;
+					}
+				}
+				.card-projects {
+					width: 100%;
+					height: 244px;
+					h5 {
+						font-family: 'Roboto';
+						font-style: normal;
+						font-weight: 500;
+						font-size: 20px;
+						line-height: 150%;
+						letter-spacing: 0.025em;
+						color: #162C3D;
+						span {
+							font-weight: 700;
+						}
+					}
+				}
+			}
+		}
+		&__title {
+			display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      .sub-title {
+				font-family: $Raleway;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 38px;
+				line-height: 45px;
+				
+				color: #162C3D;
+      }
+      .image {
+        margin-right: 12px;
+				margin-top: 13px;
+      }
+		}
+	}
+}

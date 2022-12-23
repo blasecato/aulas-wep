@@ -92,7 +92,133 @@
 		</div>
 	</div>
 	<div class="section-our-team">
-		
+		<div class="container">
+			<div class="section-our-team__title">
+				<img src="<?php echo "$urlTemplate/assets/images/item-green.png" ?>" alt="item" class="item" />
+				<h2 class="sub-title">Nuestro equipo</h2>
+			</div>
+			<p class="section-our-team-sub-title">comité directivo</p>
+			<div class="section-our-team__gird">
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user3.png" ?>" alt="user" class="user" />
+					<h3>Ana María Velásquez</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user2.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user1.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+			</div>
+			<div class="section-our-team__gird">
+				<div class="card-user">
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user3.png" ?>" alt="user" class="user" />
+					<h3>Ana María Velásquez</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user2.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user1.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+			</div>
+			<p class="section-our-team-sub-title">equipo consultor</p>
+			<div class="section-our-team__gird">
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user3.png" ?>" alt="user" class="user" />
+					<h3>Ana María Velásquez</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user2.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user1.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+			</div>
+			<div class="section-our-team__gird">
+				<div class="card-user">
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user3.png" ?>" alt="user" class="user" />
+					<h3>Ana María Velásquez</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user2.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+				<div class="card-user">
+					<img src="<?php echo "$urlTemplate/assets/images/user1.png" ?>" alt="user" class="user" />
+					<h3>Daniel Suarez Zuñiga</h3>
+					<p>PHD EN PSICOLOGÍA</p>
+					<span>Profesora Asociada. Departamento de Educación. Universidad de los Andes.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section-our-impact">
+		<div class="box">
+			<div class="box--content">
+				<div class="box__title">
+					<img src="<?php echo "$urlTemplate/assets/images/item-yellow.png" ?>" alt="item" class="item" />
+					<h2 class="sub-title">Nuestro impacto</h2>
+				</div>
+				<p class="text">Desde el inicio del programa en 2005, hemos trabajado en 47 municipios de Colombia, con 478
+					instituciones
+					educativas y hemos impactado cerca de 9112 docentes, 266.450 estudiantes entre segundo y quinto de primaria y
+					a
+					cerca del 20% de las familias de estos estudiantes.
+				</p>
+				<img src="<?php echo "$urlTemplate/assets/images/map.png" ?>" alt="mapa" class="map" />
+			</div>
+		</div>
+		<div class="box box-items">
+			<div class="item">
+				<h4 class="item-title">Municipios de Colombia</h4>
+				<h1 class="number-big">47</h1>
+			</div>
+			<div class="item">
+				<h4 class="item-title">Instituciones educativas</h4>
+				<h1 class="number-big">478</h1>
+			</div>
+			<div class="item">
+				<h4 class="item-title">Estudiantes (Segundo y quinto de primaria)</h4>
+				<h1 class="number-big">266k</h1>
+			</div>
+			<div class="item">
+				<h4 class="item-title">Madres, padres y cuidadores</h4>
+				<h1 class="number-big">532k</h1>
+			</div>
+		</div>
 	</div>
 </section>
 <div class="networks">

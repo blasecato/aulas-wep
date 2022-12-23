@@ -1,4 +1,5 @@
 import "../sass/main.scss";
+import "./hola.js"
 
 $(document).ready(function () {
   $(".caroucel-Social-networks").slick({
