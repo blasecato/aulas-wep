@@ -27,7 +27,7 @@
 	<div id="content" class="site-content">
 		<div id="primary" class="content-area">
 		<?php $urlTemplate = get_template_directory_uri() ?>
-			<nav class="Header">
+			<nav class="Header" id="top">
 				<div class="container">
 					<a href="./">
 						<img src="<?php echo "$urlTemplate/assets/images/logo-Aulas.jpg" ?>" alt="logo" class="logo"/>
@@ -38,8 +38,8 @@
 							<a href="/we-make">Qué hacemos</a>
 							<a href="/how-we-do">Cómo lo hacemos</a>
 							<a href="/programs">Programas</a>
-							<a href="/">Recursos</a>
-							<a href="/">Contacto</a>
+							<a href="/resources/">Recursos</a>
+							<a href="/contact/">Contacto</a>
 						</li>
 					</ul>
 				</div>

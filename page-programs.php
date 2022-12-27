@@ -96,6 +96,113 @@
 			<img src="<?php echo "$urlTemplate/assets/images/change.png" ?>" alt="change" class="change" />
 		</div>
 	</div>
+	<div class="programs__components">
+		<div class="container">
+			<div class="programs__components__title">
+				<img src="<?php echo "$urlTemplate/assets/images/item-orange.png" ?>" alt="item" class="item" />
+				<h2 class="sub-title">Componentes del programa</h2>
+			</div>
+			<div class="items">
+				<button class="items-item items-item--active"><img
+						src="<?php echo "$urlTemplate/assets/images/arrow-orange-down.png" ?>" alt="item" class="item" />Formación
+					Docente</button>
+				<button class="items-item"><img src="<?php echo "$urlTemplate/assets/images/arrow-down.svg" ?>" alt="item"
+						class="item" />Implementación en el aula</button>
+				<button class="items-item"><img src="<?php echo "$urlTemplate/assets/images/arrow-down.svg" ?>" alt="item"
+						class="item" />Implementación en el aula</button>
+				<button class="items-item"><img src="<?php echo "$urlTemplate/assets/images/arrow-down.svg" ?>" alt="item"
+						class="item" />Clubes Aulas en Paz</button>
+				<button class="items-item"><img src="<?php echo "$urlTemplate/assets/images/arrow-down.svg" ?>" alt="item"
+						class="item" />Talleres con Familias</button>
+			</div>
+			<div class="flex">
+				<div class="flex-box">
+					<p class="paragraph">
+						Formamos a los docentes como agentes de cambio para que, a través del modelamiento y de diferentes
+						metodologías
+						prácticas aplicables en el aula, puedan ayudar a sus estudiantes a desarrollar las habilidades
+						socioemocionales
+						necesarias para aprender a convivir de manera pacífica. En este componente, los docentes aprenden sobre:
+					</p>
+					<ul class="list">
+						<li class="paragraph">
+							Estilos docentes
+						</li>
+						<li class="paragraph">
+							Conflicto
+						</li>
+						<li class="paragraph">
+							Intimidación escolar
+						</li>
+						<li class="paragraph">
+							Metodología para integrar el programa en el aula
+						</li>
+					</ul>
+				</div>
+				<img src="<?php echo "$urlTemplate/assets/images/librery.png" ?>" alt="brand" class="librery" />
+			</div>
+		</div>
+	</div>
+	<div class="programs__section">
+		<div class="container">
+			<h2 class="title">¿Qué puede lograr tu institución al <br /> implementar este programa?</h2>
+			<div class="flex-wrap">
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Desarrollar competencias ciudadanas que contribuyen a la prevención de situaciones de agresión y al
+						mejoramiento de los ambientes de aprendizaje.
+					</p>
+				</div>
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Reducir la frecuencia de las conductas agresivas observadas en el aula y en el patio de recreo.
+					</p>
+				</div>
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Aumentar comportamientos prosociales de los niños y niñas (por ejemplo, invitar a jugar a compañeros que
+						está solo, tratar de parar peleas, disminuir creencias que legitiman la agresión.
+					</p>
+				</div>
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Aumentar actitudes prosociales como: ayudar, cooperar, consolar en los niños y niñas que participan en el
+						programa.
+					</p>
+				</div>
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Disminuir radicalmente las interrupciones por indisciplina durante las clases
+					</p>
+				</div>
+				<div class="box-card">
+					<div class="box-card__circle"></div>
+					<p class="paragraph">
+						Si quieres conocer más sobre nuestras evaluaciones de impacto, te invitamos a leer este artículo.
+					</p>
+				</div>
+			</div>
+			<div class="cards">
+				<div class="cards__card-info">
+					<h3 class="cards__card-info--title">
+						¡Explora el material gratuito del programa en nuestro Centro de Recursos!
+					</h3>
+					<a href="./" class="see-more see-more--blue-ligth">conoce más</a>
+				</div>
+				<div class="cards__card-info">
+					<h3 class="cards__card-info--title">
+						¿Quieres implementar el programa en tu colegio o institución educativa?
+					</h3>
+					<a href="./" class="see-more see-more--black">conoce más</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <div class="networks">
 	<a href="" class="item">

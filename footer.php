@@ -32,6 +32,9 @@
 			<a href="" class="item">Youtube</a>
 		</div>
 	</div>
+	<a href="#top" class="go-top">
+		Volver <br /> al top
+	</a>
 </footer><!-- #colophon -->
 
 </div><!-- #page -->
