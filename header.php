@@ -29,7 +29,7 @@
 		<?php $urlTemplate = get_template_directory_uri() ?>
 			<nav class="Header" id="top">
 				<div class="container">
-					<a href="./">
+					<a href="/">
 						<img src="<?php echo "$urlTemplate/assets/images/logo-Aulas.jpg" ?>" alt="logo" class="logo"/>
 					</a>
 					<ul>

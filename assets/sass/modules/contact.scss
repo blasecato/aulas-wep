@@ -1,3 +1,68 @@
 .page-contact {
-
+  min-height: calc(100vh - 132px);
+  background: #162c3d;
+  padding: 80px;
+  .container {
+    align-items: flex-start;
+    .column {
+      width: 50%;
+      .title-contact {
+        font-family: $Raleway;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 59px;
+        color: #f2789d;
+      }
+      .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ffffff;
+        width: 100%;
+        margin-bottom: 25px;
+        background-color: transparent;
+        padding-left: 0;
+        box-shadow: none;
+        &:active,
+        &:hover,
+        &:focus {
+          box-shadow: none;
+        }
+				&--textarea {
+					background: rgba(255, 255, 255, 0.1);
+					border: 1px solid #FFFFFF;
+					height: 176px;
+					border-radius: 0 25px 25px 25px;
+					resize: none;
+					padding: 10px;
+				}
+      }
+			.btn-send {
+				height: 44px;
+				padding: 5px 20px;
+				background: #F9B03D;
+				border-radius: 35px;
+				font-family: $Raleway;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 15px;
+				line-height: 14px;
+				color: #FFFFFF;
+			}
+			.form-label {
+				margin-bottom: 16px;
+			}
+			.form-label,
+      .form-control,
+      .form-control::placeholder {
+        font-family: $Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+        letter-spacing: 0.025em;
+        color: #ffffff;
+      }
+    }
+  }
 }
