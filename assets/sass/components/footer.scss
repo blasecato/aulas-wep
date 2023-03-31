@@ -1,7 +1,7 @@
 .Footer {
   display: flex;
   align-items: flex-start;
-  background: #536977;
+  background: #203240;
   padding: 90px 80px;
   position: relative;
   &--title {
@@ -30,8 +30,19 @@
       line-height: 150%;
       color: #ffffff;
       text-decoration: none;
+      img {
+        display: none;
+      }
       &--email {
         text-decoration: underline;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+      &-nodecoration {
+        &:hover {
+          text-decoration: none !important;
+        }
       }
     }
   }
@@ -56,4 +67,45 @@
 		right: 20px;
 		z-index: 100;
 	}
+  .flex {
+    display: flex;
+    gap: 60px;
+  }
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+    &--title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+    &__colum {
+      height: auto;
+      margin-top: 32px;
+      .item {
+        font-size: 16px;
+        line-height: 150%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 10px;
+        img {
+          display: block;
+          width: 20px;
+          max-height: 24px;
+          margin-right: 5px;
+        }
+      }
+    }
+    .container {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .go-top {
+      width: 80px;
+      height: 80px;
+      font-size: 15px;
+      line-height: 17px;
+      top: -40px;
+    }
+  }
 }

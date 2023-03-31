@@ -427,6 +427,11 @@ function twenty_twenty_one_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
+	wp_register_script(
+		'index',
+		get_template_directory_uri() . '/assets/js/index.js',
+		true
+	);
 
 	// Register the IE11 polyfill loader.
 	wp_register_script(
@@ -446,17 +451,6 @@ function twenty_twenty_one_scripts() {
 		)
 	);
 
-	// Main navigation scripts.
-	if ( has_nav_menu( 'primary' ) ) {
-		wp_enqueue_script(
-			'twenty-twenty-one-primary-navigation-script',
-			get_template_directory_uri() . '/assets/js/primary-navigation.js',
-			array( 'twenty-twenty-one-ie11-polyfills' ),
-			wp_get_theme()->get( 'Version' ),
-			true
-		);
-	}
-
 	// Responsive embeds script.
 	wp_enqueue_script(
 		'twenty-twenty-one-responsive-embeds-script',
@@ -468,6 +462,36 @@ function twenty_twenty_one_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'twenty_twenty_one_scripts' );
 
+
+
+
+
+
+function index_scripts() {
+	// Note, the is_IE global variable is defined by WordPress and is used
+	// to detect if the current browser is internet explorer.
+	global $is_IE, $wp_scripts;
+	wp_register_script(
+		'index',
+		get_template_directory_uri() . '/assets/js/index.js',
+		true
+	);
+}
+add_action( 'init', 'index_scripts' );
+
+
+
+
+function my_enqueue_scripts() {
+  if ( is_front_page() ) {
+    wp_enqueue_script( 'index' );
+  } elseif ( is_page_template( 'page.php' ) ) {
+    wp_enqueue_script( 'index' );
+  } else {
+    wp_enqueue_script( 'index' );
+  }
+}
+add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
 /**
  * Enqueue block editor script.
  *
@@ -651,3 +675,1967 @@ if ( ! function_exists( 'wp_get_list_item_separator' ) ) :
 		return __( ', ', 'twentytwentyone' );
 	}
 endif;
+
+// Register Custom Post Type
+function custom_post_type() {
+
+	$labels = array(
+		'name'                  => _x( 'banner', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'banners', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Post Types', 'text_domain' ),
+		'name_admin_bar'        => __( 'Post Type', 'text_domain' ),
+		'archives'              => __( 'Item Archives', 'text_domain' ),
+		'attributes'            => __( 'Item Attributes', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+		'all_items'             => __( 'All Items', 'text_domain' ),
+		'add_new_item'          => __( 'Add New Item', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit Item', 'text_domain' ),
+		'update_item'           => __( 'Update Item', 'text_domain' ),
+		'view_item'             => __( 'View Item', 'text_domain' ),
+		'view_items'            => __( 'View Items', 'text_domain' ),
+		'search_items'          => __( 'Search Item', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+		'items_list'            => __( 'Items list', 'text_domain' ),
+		'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'banners', 'text_domain' ),
+		'description'           => __( 'this-is-banner', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor' ),
+		'taxonomies'            => array( 'general' ),
+		'hierarchical'          => true,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'banner-home', $args );
+
+}
+add_action( 'init', 'custom_post_type', 0 );
+
+
+function custom_post_type_events()
+{
+
+  $labels = array(
+    'name'                  => _x('Eventos', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('Evento', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('Eventos', 'text_domain'),
+    'name_admin_bar'        => __('Eventos', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'eventos',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('Evento', 'text_domain'),
+    'description'           => __('eventos de AMASFAC', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('events', $args);
+}
+add_action('init', 'custom_post_type_events', 0);
+
+
+function custom_post_type_bannerHome()
+{
+
+  $labels = array(
+    'name'                  => _x('bannerHome', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('bannerHome', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('bannerHome', 'text_domain'),
+    'name_admin_bar'        => __('bannerHome', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'bannerHome',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('bannerHome', 'text_domain'),
+    'description'           => __('bannerHome', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('bannerHome', $args);
+}
+add_action('init', 'custom_post_type_bannerHome', 0);
+
+function custom_post_type_queHacemos()
+{
+
+  $labels = array(
+    'name'                  => _x('queHacemos', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('queHacemos', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('queHacemos', 'text_domain'),
+    'name_admin_bar'        => __('queHacemos', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'queHacemos',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('queHacemos', 'text_domain'),
+    'description'           => __('queHacemos', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('queHacemos', $args);
+}
+add_action('init', 'custom_post_type_queHacemos', 0);
+
+function custom_post_type_hacemosTrabajoCon()
+{
+
+  $labels = array(
+    'name'                  => _x('hacemosTrabajoCon', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('hacemosTrabajoCon', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('hacemosTrabajoCon', 'text_domain'),
+    'name_admin_bar'        => __('hacemosTrabajoCon', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'hacemosTrabajoCon',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('hacemosTrabajoCon', 'text_domain'),
+    'description'           => __('hacemosTrabajoCon', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('hacemosTrabajoCon', $args);
+}
+add_action('init', 'custom_post_type_hacemosTrabajoCon', 0);
+
+function custom_post_type_hacemosParteDe()
+{
+
+  $labels = array(
+    'name'                  => _x('hacemosParteDe', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('hacemosParteDe', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('hacemosParteDe', 'text_domain'),
+    'name_admin_bar'        => __('hacemosParteDe', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'hacemosParteDe',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('hacemosParteDe', 'text_domain'),
+    'description'           => __('hacemosParteDe', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('hacemosParteDe', $args);
+}
+add_action('init', 'custom_post_type_hacemosParteDe', 0);
+
+function custom_post_type_quienesSomos()
+{
+
+  $labels = array(
+    'name'                  => _x('quienesSomos', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('quienesSomos', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('quienesSomos', 'text_domain'),
+    'name_admin_bar'        => __('quienesSomos', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'quienesSomos',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('quienesSomos', 'text_domain'),
+    'description'           => __('quienesSomos', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('quienesSomos', $args);
+}
+add_action('init', 'custom_post_type_quienesSomos', 0);
+
+function custom_post_type_nuestroAdn()
+{
+
+  $labels = array(
+    'name'                  => _x('nuestroAdn', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('nuestroAdn', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('nuestroAdn', 'text_domain'),
+    'name_admin_bar'        => __('nuestroAdn', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'nuestroAdn',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('nuestroAdn', 'text_domain'),
+    'description'           => __('nuestroAdn', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('nuestroAdn', $args);
+}
+add_action('init', 'custom_post_type_nuestroAdn', 0);
+
+function custom_post_type_nuestroInpacto()
+{
+
+  $labels = array(
+    'name'                  => _x('nuestroInpacto', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('nuestroInpacto', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('nuestroInpacto', 'text_domain'),
+    'name_admin_bar'        => __('nuestroInpacto', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'nuestroInpacto',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('nuestroInpacto', 'text_domain'),
+    'description'           => __('nuestroInpacto', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('nuestroInpacto', $args);
+}
+add_action('init', 'custom_post_type_nuestroInpacto', 0);
+
+function custom_post_type_weMake()
+{
+
+  $labels = array(
+    'name'                  => _x('weMake', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('weMake', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('weMake', 'text_domain'),
+    'name_admin_bar'        => __('weMake', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'weMake',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('weMake', 'text_domain'),
+    'description'           => __('weMake', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('weMake', $args);
+}
+add_action('init', 'custom_post_type_weMake', 0);
+
+function custom_post_type_cardsProjects()
+{
+
+  $labels = array(
+    'name'                  => _x('cardsProjects', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('cardsProjects', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('cardsProjects', 'text_domain'),
+    'name_admin_bar'        => __('cardsProjects', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'cardsProjects',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('cardsProjects', 'text_domain'),
+    'description'           => __('cardsProjects', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('cardsProjects', $args);
+}
+add_action('init', 'custom_post_type_cardsProjects', 0);
+
+function custom_post_type_readyPrograms()
+{
+
+  $labels = array(
+    'name'                  => _x('readyPrograms', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('readyPrograms', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('readyPrograms', 'text_domain'),
+    'name_admin_bar'        => __('readyPrograms', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'readyPrograms',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('readyPrograms', 'text_domain'),
+    'description'           => __('readyPrograms', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('readyPrograms', $args);
+}
+add_action('init', 'custom_post_type_readyPrograms', 0);
+
+function custom_post_type_mostRecentProjects()
+{
+
+  $labels = array(
+    'name'                  => _x('mostRecentProjects', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('mostRecentProjects', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('mostRecentProjects', 'text_domain'),
+    'name_admin_bar'        => __('mostRecentProjects', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'mostRecentProjects',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('mostRecentProjects', 'text_domain'),
+    'description'           => __('mostRecentProjects', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('mostRecentProjects', $args);
+}
+add_action('init', 'custom_post_type_mostRecentProjects', 0);
+
+function custom_post_type_banners()
+{
+
+  $labels = array(
+    'name'                  => _x('banners', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('banners', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('banners', 'text_domain'),
+    'name_admin_bar'        => __('banners', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'banners',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('banners', 'text_domain'),
+    'description'           => __('banners', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('banners', $args);
+}
+add_action('init', 'custom_post_type_banners', 0);
+
+function custom_post_type_cardsSkills()
+{
+
+  $labels = array(
+    'name'                  => _x('cardsSkills', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('cardsSkills', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('cardsSkills', 'text_domain'),
+    'name_admin_bar'        => __('cardsSkills', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'cardsSkills',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('cardsSkills', 'text_domain'),
+    'description'           => __('cardsSkills', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('cardsSkills', $args);
+}
+add_action('init', 'custom_post_type_cardsSkills', 0);
+
+function custom_post_type_ejesTematicos()
+{
+
+  $labels = array(
+    'name'                  => _x('ejesTematicos', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('ejesTematicos', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('ejesTematicos', 'text_domain'),
+    'name_admin_bar'        => __('ejesTematicos', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'ejesTematicos',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('ejesTematicos', 'text_domain'),
+    'description'           => __('ejesTematicos', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('ejesTematicos', $args);
+}
+add_action('init', 'custom_post_type_ejesTematicos', 0);
+
+function custom_post_type_tabsPrincipios()
+{
+  $labels = array(
+    'name'                  => _x('tabsPrincipios', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('tabsPrincipios', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('tabsPrincipios', 'text_domain'),
+    'name_admin_bar'        => __('tabsPrincipios', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'tabsPrincipios',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('tabsPrincipios', 'text_domain'),
+    'description'           => __('tabsPrincipios', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('tabsPrincipios', $args);
+}
+add_action('init', 'custom_post_type_tabsPrincipios', 0);
+
+function custom_post_type_cardPrograms()
+{
+  $labels = array(
+    'name'                  => _x('cardPrograms', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('cardPrograms', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('cardPrograms', 'text_domain'),
+    'name_admin_bar'        => __('cardPrograms', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'cardPrograms',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('cardPrograms', 'text_domain'),
+    'description'           => __('cardPrograms', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('cardPrograms', $args);
+}
+add_action('init', 'custom_post_type_cardPrograms', 0);
+
+function custom_post_type_weSeek()
+{
+  $labels = array(
+    'name'                  => _x('weSeek', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('weSeek', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('weSeek', 'text_domain'),
+    'name_admin_bar'        => __('weSeek', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'weSeek',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('weSeek', 'text_domain'),
+    'description'           => __('weSeek', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('weSeek', $args);
+}
+add_action('init', 'custom_post_type_weSeek', 0);
+
+function custom_post_type_components()
+{
+  $labels = array(
+    'name'                  => _x('components', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('components', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('components', 'text_domain'),
+    'name_admin_bar'        => __('components', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'components',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('components', 'text_domain'),
+    'description'           => __('components', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('components', $args);
+}
+add_action('init', 'custom_post_type_components', 0);
+
+function custom_post_type_youCanAchieve()
+{
+  $labels = array(
+    'name'                  => _x('youCanAchieve', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('youCanAchieve', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('youCanAchieve', 'text_domain'),
+    'name_admin_bar'        => __('youCanAchieve', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'youCanAchieve',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('youCanAchieve', 'text_domain'),
+    'description'           => __('youCanAchieve', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('youCanAchieve', $args);
+}
+add_action('init', 'custom_post_type_youCanAchieve', 0);
+
+function custom_post_type_CardAchieve()
+{
+  $labels = array(
+    'name'                  => _x('CardAchieve', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('CardAchieve', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('CardAchieve', 'text_domain'),
+    'name_admin_bar'        => __('CardAchieve', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'CardAchieve',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('CardAchieve', 'text_domain'),
+    'description'           => __('CardAchieve', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('CardAchieve', $args);
+}
+add_action('init', 'custom_post_type_CardAchieve', 0);
+
+function custom_post_type_aprenderApromover()
+{
+  $labels = array(
+    'name'                  => _x('aprenderApromover', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('aprenderApromover', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('aprenderApromover', 'text_domain'),
+    'name_admin_bar'        => __('aprenderApromover', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'aprenderApromover',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('aprenderApromover', 'text_domain'),
+    'description'           => __('aprenderApromover', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('aprenderApromover', $args);
+}
+add_action('init', 'custom_post_type_aprenderApromover', 0);
+
+function custom_post_type_redesSociales()
+{
+  $labels = array(
+    'name'                  => _x('redesSociales', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('redesSociales', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('redesSociales', 'text_domain'),
+    'name_admin_bar'        => __('redesSociales', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'redesSociales',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('redesSociales', 'text_domain'),
+    'description'           => __('redesSociales', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('redesSociales', $args);
+}
+add_action('init', 'custom_post_type_redesSociales', 0);
+
+function custom_post_type_gestionar_tematica()
+{
+  $labels = array(
+    'name'                  => _x('gestionar_tematica', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('gestionar_tematica', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('gestionar_tematica', 'text_domain'),
+    'name_admin_bar'        => __('gestionar_tematica', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'gestionar_tematica',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('gestionar_tematica', 'text_domain'),
+    'description'           => __('gestionar_tematica', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('gestionar_tematica', $args);
+}
+add_action('init', 'custom_post_type_gestionar_tematica', 0);
+
+
+function custom_post_type_comite_directivo()
+{
+  $labels = array(
+    'name'                  => _x('comite_directivo', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('comite_directivo', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('comite_directivo', 'text_domain'),
+    'name_admin_bar'        => __('comite_directivo', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'comite_directivo',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('comite_directivo', 'text_domain'),
+    'description'           => __('comite_directivo', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('comite_directivo', $args);
+}
+add_action('init', 'custom_post_type_comite_directivo', 0);
+
+function custom_post_type_equipo_consultor()
+{
+  $labels = array(
+    'name'                  => _x('equipo_consultor', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('equipo_consultor', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('equipo_consultor', 'text_domain'),
+    'name_admin_bar'        => __('equipo_consultor', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'equipo_consultor',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('equipo_consultor', 'text_domain'),
+    'description'           => __('equipo_consultor', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('equipo_consultor', $args);
+}
+add_action('init', 'custom_post_type_equipo_consultor', 0);
+
+function custom_post_type_programs_view()
+{
+  $labels = array(
+    'name'                  => _x('programs_view', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('programs_view', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('programs_view', 'text_domain'),
+    'name_admin_bar'        => __('programs_view', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'programs_view',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('programs_view', 'text_domain'),
+    'description'           => __('programs_view', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('programs_view', $args);
+}
+add_action('init', 'custom_post_type_programs_view', 0);
+
+
+function custom_post_type_recurso_recursos()
+{
+  $labels = array(
+    'name'                  => _x('recurso_recursos', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('recurso_recursos', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('recurso_recursos', 'text_domain'),
+    'name_admin_bar'        => __('recurso_recursos', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'recurso_recursos',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('recurso_recursos', 'text_domain'),
+    'description'           => __('recurso_recursos', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('recurso_recursos', $args);
+}
+add_action('init', 'custom_post_type_recurso_recursos', 0);
+function custom_post_type_recursos_tematicas()
+{
+  $labels = array(
+    'name'                  => _x('recursos_tematicas', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('recursos_tematicas', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('recursos_tematicas', 'text_domain'),
+    'name_admin_bar'        => __('recursos_tematicas', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'recursos_tematicas',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('recursos_tematicas', 'text_domain'),
+    'description'           => __('recursos_tematicas', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('recursos_tematicas', $args);
+}
+add_action('init', 'custom_post_type_recursos_tematicas', 0);
+
+function custom_post_type_recursos_cards()
+{
+  $labels = array(
+    'name'                  => _x('recursos_cards', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('recursos_cards', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('recursos_cards', 'text_domain'),
+    'name_admin_bar'        => __('recursos_cards', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'recursos_cards',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('recursos_cards', 'text_domain'),
+    'description'           => __('recursos_cards', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('recursos_cards', $args);
+}
+add_action('init', 'custom_post_type_recursos_cards', 0);
