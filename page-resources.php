@@ -83,7 +83,7 @@ $recurso_recursos = new WP_Query([
 								$recursos_tematicas->the_post();
 								?>
 								<button id="<?php echo the_field('identificador') ?>" class="button-filter"
-									onclick="arrayResources('<?php echo the_field('identificador') ?>', '<?php echo the_field('colorSeeMore') ?>')">
+									onclick="arrayResources('<?php echo the_field('identificador') ?>', '<?php echo the_field('colorSeeMore') ?>', 'tematica')">
 									<?php echo the_title() ?>
 									<img src="<?php echo "$urlTemplate/assets/images/close.png" ?>" alt="brand" class="brand" />
 								</button>
@@ -105,7 +105,7 @@ $recurso_recursos = new WP_Query([
 								$recurso_recursos->the_post();
 								?>
 								<button id="<?php echo the_field('identificador') ?>" class="button-filter"
-									onclick="arrayResources('<?php echo the_field('identificador') ?>', '<?php echo the_field('colorSeeMore') ?>')">
+									onclick="arrayResources('<?php echo the_field('identificador') ?>', '<?php echo the_field('colorSeeMore') ?>', 'recursos')">
 									<?php echo the_title() ?>
 									<img src="<?php echo "$urlTemplate/assets/images/close.png" ?>" alt="brand" class="brand" />
 								</button>
@@ -143,7 +143,7 @@ $recurso_recursos = new WP_Query([
 											<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 										<?php endif; ?>
 										<span>
-											<?php echo the_field("tematica"); ?>
+											<?php echo the_field("nombreRecurso"); ?>
 										</span>
 									</div>
 									<?php echo the_post_thumbnail() ?>
@@ -161,6 +161,8 @@ $recurso_recursos = new WP_Query([
 						<?php
 						$tematica = get_field('tematica');
 						$category = get_field('identificador');
+						$recurso = get_field('nombreRecurso');
+						$idRecurso = get_field('identificadorDeRecurso');
 						$color = get_field("colorSeeMore");
 						$title = get_the_title();
 						$text = get_the_content();
@@ -175,6 +177,8 @@ $recurso_recursos = new WP_Query([
 							"color" => $color,
 							"image" => $image['url'],
 							"url" => $url,
+							"recurso" => $recurso,
+							"idRecurso" => $idRecurso,
 							"title" => $title,
 							"imageBig" => $imageBig,
 							"category" => $category,
@@ -187,7 +191,7 @@ $recurso_recursos = new WP_Query([
 				?>
 			</div>
 			<div id="flex-wrap" class="felx-wrap">
-				
+
 			</div>
 			<div class="center">
 				<a href="" class="see-more see-more--orange-ligth">cargar más</a>
@@ -223,14 +227,14 @@ $recurso_recursos = new WP_Query([
 			document.querySelector(`.felx-wrap`)?.classList?.remove("element-hidden")
 		}
 	}
-	const arrayResources = (item, color) => {
-		console.log(item, color);
+	const arrayResources = (item, color, type) => {
+		console.log("holaaaaaasdasd", item, color, type);
 		if (array.length <= 0) {
 			array.push(item)
 			document.querySelector(`#${item}`)?.classList?.add("button-filter--active")
 			document.querySelector(`#${item}`).style.background = `${color}`;
 			elementHidden();
-			functionFilter(arrayCantCards, item);
+			functionFilter(arrayCantCards, item, type);
 		} else {
 			for (let index = 0; index < array.length; index++) {
 				const arrayIndex = array.findIndex(
@@ -241,37 +245,197 @@ $recurso_recursos = new WP_Query([
 					document.querySelector(`#${item}`)?.classList?.remove("button-filter--active")
 					document.querySelector(`#${item}`).style.background = "#e3e3e3";
 					elementHidden();
-					functionFilter(arrayCantCards, item);
+					functionFilter(arrayCantCards, item, type);
 					return
 				} else {
 					array.push(item)
 					document.querySelector(`#${item}`)?.classList?.add("button-filter--active")
 					document.querySelector(`#${item}`).style.background = `${color}`;
 					elementHidden();
-					functionFilter(arrayCantCards, item);
+					functionFilter(arrayCantCards, item, type);
 					return
 				}
 			}
 		}
 	}
-	const functionFilter = (arrayCard, item) => {
-		for (let index = 0; index < arrayCard.length; index++) {
-			if (arrayCard[index].category === item) {
-				const CardIndex = cardsFilters.findIndex(
-					(card) => card.id === arrayCard[index].id
+	const listItemsTematica = []
+	const listItemsRecursos = []
+	const functionFilter = (arrayCard, item, type) => {
+		console.log("arrayCardcsfsdfdsfds", arrayCard, item, type)
+
+
+
+
+
+		const newArray = [];
+		if (listItemsTematica.length >= 1) {
+			for (let index = 0; index < cardsFilters.length; index++) {
+				for (let j = 0; j < listItemsRecursos.length; j++) {
+					if (listItemsRecursos[j] === cardsFilters[index].idRecurso) {
+						console.log("Holasdfhdsjkfhjksdhfjsdks", listItemsRecursos[j])
+						newArray.push(cardsFilters[index])
+					}
+
+				}
+				// if (cardsFilters[index].idRecurso === item) {
+				// 	const CardIndex = cardsFilters.findIndex(
+				// 		(card) => card.id === cardsFilters[index].id
+				// 	);
+				// 	if (CardIndex >= 0) {
+				// 		console.log("cumplio 1")
+				// 	} else {
+				// 		cardsFilters.splice(CardIndex, 1);
+				// 		// cardsFilters.push(cardsFilters[index]);
+				// 		console.log("cumplio 2", cardsFilters[index])
+				// 	}
+				// }
+			}
+			// cardsFilters.push(newArray)
+			console.log("new", newArray);
+		}
+
+
+
+		if (type === "tematica") {
+			if (listItemsTematica.length <= 0) {
+				listItemsTematica.push(item);
+			} else {
+				const ItemIndex = listItemsTematica.findIndex(
+					(items) => items === item
 				);
-				if (CardIndex >= 0) {
-					cardsFilters.splice(CardIndex, 1);
+				if (ItemIndex >= 0) {
+					listItemsTematica.splice(ItemIndex, 1);
 				} else {
-					cardsFilters.push(arrayCard[index]);
+					listItemsTematica.push(item);
+				}
+			}
+			console.log("listItemsTematica", listItemsTematica)
+		}
+		if (type === "recursos") {
+			if (listItemsRecursos.length <= 0) {
+				listItemsRecursos.push(item);
+			} else {
+				const ItemIndex = listItemsRecursos.findIndex(
+					(items) => items === item
+				);
+				if (ItemIndex >= 0) {
+					listItemsRecursos.splice(ItemIndex, 1);
+				} else {
+					listItemsRecursos.push(item);
+				}
+			}
+			console.log("listItemsRecursos", listItemsRecursos)
+		}
+
+		if (type === "tematica") {
+			for (let index = 0; index < arrayCard.length; index++) {
+				if (arrayCard[index].category === item) {
+					const CardIndex = cardsFilters.findIndex(
+						(card) => card.id === arrayCard[index].id
+					);
+					if (CardIndex >= 0) {
+						cardsFilters.splice(CardIndex, 1);
+					} else {
+						cardsFilters.push(arrayCard[index]);
+					}
 				}
 			}
 		}
+
+		if (listItemsTematica.length <= 0) {
+			for (let index = 0; index < arrayCard.length; index++) {
+				if (arrayCard[index].idRecurso === item) {
+					const CardIndex = cardsFilters.findIndex(
+						(card) => card.id === arrayCard[index].id
+					);
+					if (CardIndex >= 0) {
+						cardsFilters.splice(CardIndex, 1);
+					} else {
+						cardsFilters.push(arrayCard[index]);
+					}
+				}
+			}
+		}
+
+
+		// if (listItemsRecursos.length >= 1 && listItemsTematica.length >= 1) {
+		// 	for (let index = 0; index < arrayCard.length; index++) {
+
+		// 		console.log(tematicaIndex)
+		// 		console.log(recursosIndex)
+		// 	}
+		// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// if (type === "tematica") {
+		// 	for (let index = 0; index < arrayCard.length; index++) {
+		// 		if (arrayCard[index].category === item) {
+		// 			const CardIndex = cardsFilters.findIndex(
+		// 				(card) => card.id === arrayCard[index].id
+		// 			);
+		// 			if (CardIndex >= 0) {
+		// 				for (let j = 0; j < listItemsRecursos.length; j++) {
+		// 					if (arrayCard[index].idRecurso !== listItemsRecursos[j]) {
+		// 						cardsFilters.splice(CardIndex, 1);
+
+		// 					}
+
+		// 				}
+
+		// 			} else {
+		// 				cardsFilters.push(arrayCard[index]);
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// if (type === "recursos") {
+		// 	for (let index = 0; index < arrayCard.length; index++) {
+		// 		if (arrayCard[index].idRecurso === item) {
+		// 			const CardIndex = cardsFilters.findIndex(
+		// 				(card) => card.id === arrayCard[index].id
+		// 			);
+		// 			if (CardIndex >= 0) {
+		// 				for (let j = 0; j < listItemsTematica.length; j++) {
+		// 					if (arrayCard[index].category !== listItemsTematica[j]) {
+		// 						cardsFilters.splice(CardIndex, 1);
+
+		// 					}
+		// 				}
+		// 			} else {
+		// 				cardsFilters.push(arrayCard[index]);
+		// 			}
+		// 		}
+		// 	}
+
+		// }
+		if (listItemsTematica.length === 0 && listItemsRecursos === 0) {
+			cardsFilters = [];
+		}
+		console.log("cardsFilters", cardsFilters)
 		functionCreateCards(cardsFilters)
 	}
 	const functionCreateCards = (cardsFilters) => {
 		var wrap = document.getElementById("flex-wrap");
-		
+
 
 		for (let index = 0; index < arrayCantCards.length; index++) {
 			var card_exist = document.getElementById(`card-${arrayCantCards[index].id}`);
@@ -299,12 +463,12 @@ $recurso_recursos = new WP_Query([
 				head.appendChild(cont_img)
 				p_title.textContent = `${cardsFilters[index].tematica}`
 				h2_title.textContent = `${cardsFilters[index].title}`
-				
+
 				var imageBig = document.createElement('img');
 				var icon = document.createElement('img');
 				var type = document.createElement('div');
 				var span = document.createElement('span');
-				span.textContent = `${cardsFilters[index].tematica}`
+				span.textContent = `${cardsFilters[index].idRecurso}`
 				type.setAttribute("class", "type")
 				imageBig.setAttribute("src", `${cardsFilters[index].imageBig}`);
 				icon.setAttribute("src", `${cardsFilters[index].image}`);
@@ -312,7 +476,7 @@ $recurso_recursos = new WP_Query([
 				cont_img.appendChild(imageBig)
 				type.appendChild(icon)
 				type.appendChild(span)
-	
+
 				var bottom = document.createElement('div');
 				bottom.setAttribute("class", "card-developing__footer");
 				card.appendChild(bottom)
@@ -331,8 +495,10 @@ $recurso_recursos = new WP_Query([
 				bottom.appendChild(link);
 			}
 		}
+		console.log("cards222222", array);
 	}
+
 </script>
- 
+
 
 <?php get_footer();

@@ -116,11 +116,14 @@ $readyPrograms = new WP_Query([
 						$cardsProjects->the_post();
 						?>
 						<div class="card-projects">
-							<div>
-								<h3 class="card-projects--title">
-									<?php the_title(); ?>
-								</h3>
-								<?php the_content(); ?>
+							<div class="cont-text">
+								<div>
+									<h3 class="card-projects--title">
+										<?php the_title(); ?>
+									</h3>
+									<?php the_content(); ?>
+								</div>
+								<?php the_post_thumbnail() ?>
 							</div>
 							<a href="<?php echo the_field('urlSeeMore') ?>" class="see-more"
 								style="background: <?php echo the_field('colorSeeMore') ?>;">conoce más</a>
@@ -209,11 +212,14 @@ $readyPrograms = new WP_Query([
 						$mostRecentProjects->the_post();
 						?>
 						<div class="card-projects">
-							<div>
-								<h3 class="card-projects--title">
-									<?php the_title(); ?>
-								</h3>
-								<?php the_content(); ?>
+							<div class="cont-text">
+								<div>
+									<h3 class="card-projects--title">
+										<?php the_title(); ?>
+									</h3>
+									<?php the_content(); ?>
+								</div>
+								<?php the_post_thumbnail() ?>
 							</div>
 							<a href="<?php echo the_field('urlSeeMore') ?>" class="see-more"
 								style="background: <?php echo the_field('colorSeeMore') ?>;">conoce más</a>

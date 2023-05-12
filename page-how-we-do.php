@@ -18,8 +18,9 @@ $redesSociales = new WP_Query([
 ]);
 $cardsSkills = new WP_Query([
 	'offset' => 0,
-	'orderby' => 'post_date',
-	'order' => 'ASC',
+	'orderby' => 'meta_value_num',
+    'order' => 'ASC',
+	'meta_key' => 'ordenar_numericamente_habilidades',
 	'post_type' => 'cardsSkills',
 	'post_status' => 'publish'
 ]);

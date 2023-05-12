@@ -80,7 +80,7 @@
   }
   &:hover {
     color: #ffffff;
-    opacity: .8;
+    opacity: 0.8;
   }
   @media (max-width: 768px) {
     font-size: 14px !important;
@@ -117,7 +117,7 @@
       width: auto !important;
     }
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
   }
   @media (max-width: 768px) {
@@ -130,15 +130,41 @@
   border-radius: 0px 32px 32px 32px;
   padding: 30px;
   width: calc(50% - 8px);
-  height: 390px;
+  height: 410px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
+  .cont-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    p {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4; /* number of lines to show */
+              line-clamp: 4; 
+      -webkit-box-orient: vertical;
+    }
+  }
+  img {
+    width: 100px !important;
+    height: auto !important;
+  }
   &--small {
     width: 32%;
     height: 279px;
     min-width: 390px;
+    p {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5; /* number of lines to show */
+              line-clamp: 5; 
+      -webkit-box-orient: vertical;
+    }
     @media (max-width: 1280px) {
       width: 48%;
     }
@@ -152,6 +178,7 @@
 
     color: #162c3d;
   }
+  
   .content {
     p {
       font-family: "Roboto";
@@ -164,7 +191,7 @@
       margin-top: 10px;
     }
   }
-  &--text {
+  p {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
@@ -240,19 +267,21 @@
     display: flex !important;
   }
   &:hover {
-    .test-content, img, h2 {
+    .test-content,
+    img,
+    h2 {
       display: none !important;
     }
     p {
       display: flex;
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 150%;
       letter-spacing: 0.02em;
       color: #ffffff;
-      text-transform: capitalize;
+      text-transform: inherit;
     }
   }
 }

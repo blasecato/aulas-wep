@@ -10,17 +10,39 @@ $banners = new WP_Query([
 ]);
 $comite_directivo = new WP_Query([
 	'offset' => 0,
-	'orderby' => 'post_date',
-	'order' => 'ASC',
+	'orderby' => 'meta_value_num',
+    'order' => 'ASC',
+	'meta_key' => 'posicion_puesto_laboral',
 	'post_type' => 'comite_directivo',
-	'post_status' => 'publish'
+	'post_status' => 'publish',
+	'posts_per_page' => 110,
 ]);
 $equipo_consultor = new WP_Query([
 	'offset' => 0,
-	'orderby' => 'post_date',
-	'order' => 'ASC',
+    'order' => 'ASC',
+	'orderby' => 'meta_value_num',
+	'meta_key' => 'posicion_puesto_laboral',
+	'posts_per_page' => 110,
 	'post_type' => 'equipo_consultor',
 	'post_status' => 'publish'
+]);
+$equipo_nacional = new WP_Query([
+	'offset' => 0,
+	'orderby' => 'meta_value_num',
+    'order' => 'ASC',
+	'meta_key' => 'posicion_puesto_laboral',
+	'post_type' => 'equipo_nacional',
+	'post_status' => 'publish',
+	'posts_per_page' => 110,
+]);
+$equipo_regional = new WP_Query([
+	'offset' => 0,
+	'orderby' => 'meta_value_num',
+    'order' => 'ASC',
+	'meta_key' => 'posicion_puesto_laboral',
+	'post_type' => 'equipo_regional',
+	'post_status' => 'publish',
+	'posts_per_page' => 110,
 ]);
 $quienesSomos = new WP_Query([
 	'posts_per_page' => 3,
@@ -28,7 +50,7 @@ $quienesSomos = new WP_Query([
 	'orderby' => 'post_date',
 	'order' => 'ASC',
 	'post_type' => 'quienesSomos',
-	'post_status' => 'publish'
+	'post_status' => 'publish',
 ]);
 $nuestroAdn1 = new WP_Query([
 	'posts_per_page' => 2,
@@ -215,7 +237,54 @@ $redesSociales = new WP_Query([
 						<div class="card-user">
 							<?php echo the_post_thumbnail() ?>
 							<h3 style="color: <?php the_field('colorTitleSomos'); ?>"><?php the_title(); ?></h3>
-							<?php the_field('rolName'); ?>
+							<p class="rolname">
+								<?php the_field('rolname'); ?>
+							</p>
+							<span>
+								<?php the_content(); ?>
+							</span>
+						</div>
+					<?php endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div>
+
+			<p class="section-our-team-sub-title">equipo nacional</p>
+			<div class="section-our-team__gird">
+				<?php
+				if ($equipo_nacional->have_posts()):
+					while ($equipo_nacional->have_posts()):
+						$equipo_nacional->the_post();
+						?>
+						<div class="card-user">
+							<?php echo the_post_thumbnail() ?>
+							<h3 style="color: <?php the_field('colorTitleSomos'); ?>"><?php the_title(); ?></h3>
+							<p class="rolname">
+								<?php the_field('rolname'); ?>
+							</p>
+							<span>
+								<?php the_content(); ?>
+							</span>
+						</div>
+					<?php endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div>
+			<p class="section-our-team-sub-title">equipo regional</p>
+			<div class="section-our-team__gird">
+				<?php
+				if ($equipo_regional->have_posts()):
+					while ($equipo_regional->have_posts()):
+						$equipo_regional->the_post();
+						?>
+						<div class="card-user">
+							<?php echo the_post_thumbnail() ?>
+							<h3 style="color: <?php the_field('colorTitleSomos'); ?>"><?php the_title(); ?></h3>
+							<p class="rolname">
+								<?php the_field('rolname'); ?>
+							</p>
 							<span>
 								<?php the_content(); ?>
 							</span>
@@ -248,7 +317,8 @@ $redesSociales = new WP_Query([
 				<div class="mapa-cont">
 					<img src="<?php echo "$urlTemplate/assets/images/mapa.png" ?>" alt="mapa" class="map" />
 					<div class="absolute antioquia">
-						<img src="<?php echo "$urlTemplate/assets/images/mapa-antioquia.png" ?>" alt="mapa" class="map" />
+						<img src="<?php echo "$urlTemplate/assets/images/mapa-antioquia.png" ?>" alt="mapa"
+							class="map" />
 						<p>Antioquia</p>
 						<p>Chocó</p>
 						<div class="line"></div>
@@ -268,7 +338,8 @@ $redesSociales = new WP_Query([
 						<div class="line"></div>
 					</div>
 					<div class="absolute santander">
-						<img src="<?php echo "$urlTemplate/assets/images/mapa-santander.png" ?>" alt="mapa" class="map" />
+						<img src="<?php echo "$urlTemplate/assets/images/mapa-santander.png" ?>" alt="mapa"
+							class="map" />
 						<p>Santander</p>
 						<p>Norte de</p>
 						<p>Santander</p>

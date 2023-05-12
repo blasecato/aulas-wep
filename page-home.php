@@ -1,13 +1,5 @@
 <?php
 get_header();
-$bannerHome = new WP_Query([
-  'posts_per_page' => 3,
-  'offset' => 0,
-  'orderby' => 'post_date',
-  'order' => 'ASC',
-  'post_type' => 'bannerHome',
-  'post_status' => 'publish'
-]);
 $aprenderApromover = new WP_Query([
   'posts_per_page' => 1,
   'offset' => 0,
@@ -49,6 +41,25 @@ $hacemosParteDe = new WP_Query([
   'order' => 'ASC',
   'post_type' => 'hacemosParteDe',
   'post_status' => 'publish'
+]);
+
+$titleHemosTrabajadoCon = new WP_Query([
+  'posts_per_page' => 1,
+  'offset' => 0,
+  'orderby' => 'post_date',
+  'order' => 'ASC',
+  'post_type' => 'titles_seccion_home',
+  'post_status' => 'publish',
+  'category_name' => "hemos_trabajado_con",
+]);
+$titleHacemosParte = new WP_Query([
+  'posts_per_page' => 1,
+  'offset' => 0,
+  'orderby' => 'post_date',
+  'order' => 'ASC',
+  'post_type' => 'titles_seccion_home',
+  'post_status' => 'publish',
+  'category_name' => "hacemos_parte",
 ]);
 ?>
 <?php $urlTemplate = get_template_directory_uri() ?>
@@ -117,7 +128,18 @@ $hacemosParteDe = new WP_Query([
   <div class="section-working">
     <div class="container">
       <div class="section-working__title">
-        <h2 class="title-h2">Hemos trabajado con</h2>
+        <h2 class="title-h2">
+          <?php
+          if ($titleHemosTrabajadoCon->have_posts()):
+            while ($titleHemosTrabajadoCon->have_posts()):
+              $titleHemosTrabajadoCon->the_post();
+              ?>
+              <?php the_title() ?>
+            <?php endwhile;
+          endif;
+          wp_reset_postdata();
+          ?>
+        </h2>
       </div>
       <div class="section-working__brands">
         <?php
@@ -131,12 +153,26 @@ $hacemosParteDe = new WP_Query([
         wp_reset_postdata();
         ?>
       </div>
+      <div class="center">
+        <a href="/contac" class="see-more see-more--dark">¡Trabajemos juntos!</a>
+      </div>
     </div>
   </div>
   <div class="section-working section-working--two">
     <div class="container">
       <div class="section-working__title">
-        <h2 class="title-h2">Hacemos parte de</h2>
+        <h2 class="title-h2">
+          <?php
+          if ($titleHacemosParte->have_posts()):
+            while ($titleHacemosParte->have_posts()):
+              $titleHacemosParte->the_post();
+              ?>
+              <?php the_title() ?>
+            <?php endwhile;
+          endif;
+          wp_reset_postdata();
+          ?>
+        </h2>
       </div>
       <div class="section-working__brands">
         <?php

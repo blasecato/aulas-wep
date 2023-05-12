@@ -680,8 +680,8 @@ endif;
 function custom_post_type() {
 
 	$labels = array(
-		'name'                  => _x( 'banner', 'Post Type General Name', 'text_domain' ),
-		'singular_name'         => _x( 'banners', 'Post Type Singular Name', 'text_domain' ),
+		'name'                  => _x( 'titulos_banner', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'titulos_banners', 'Post Type Singular Name', 'text_domain' ),
 		'menu_name'             => __( 'Post Types', 'text_domain' ),
 		'name_admin_bar'        => __( 'Post Type', 'text_domain' ),
 		'archives'              => __( 'Item Archives', 'text_domain' ),
@@ -709,7 +709,7 @@ function custom_post_type() {
 		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
 	);
 	$args = array(
-		'label'                 => __( 'banners', 'text_domain' ),
+		'label'                 => __( 'titulos_banners', 'text_domain' ),
 		'description'           => __( 'this-is-banner', 'text_domain' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor' ),
@@ -733,134 +733,8 @@ function custom_post_type() {
 add_action( 'init', 'custom_post_type', 0 );
 
 
-function custom_post_type_events()
-{
-
-  $labels = array(
-    'name'                  => _x('Eventos', 'Post Type General Name', 'text_domain'),
-    'singular_name'         => _x('Evento', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('Eventos', 'text_domain'),
-    'name_admin_bar'        => __('Eventos', 'text_domain'),
-    'archives'              => __('Item Archives', 'text_domain'),
-    'attributes'            => __('Item Attributes', 'text_domain'),
-    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
-    'all_items'             => __('All Items', 'text_domain'),
-    'add_new_item'          => __('Add New Item', 'text_domain'),
-    'add_new'               => __('Add New', 'text_domain'),
-    'new_item'              => __('New Item', 'text_domain'),
-    'edit_item'             => __('Edit Item', 'text_domain'),
-    'update_item'           => __('Update Item', 'text_domain'),
-    'view_item'             => __('View Item', 'text_domain'),
-    'view_items'            => __('View Items', 'text_domain'),
-    'search_items'          => __('Search Item', 'text_domain'),
-    'not_found'             => __('Not found', 'text_domain'),
-    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-    'featured_image'        => __('Featured Image', 'text_domain'),
-    'set_featured_image'    => __('Set featured image', 'text_domain'),
-    'remove_featured_image' => __('Remove featured image', 'text_domain'),
-    'use_featured_image'    => __('Use as featured image', 'text_domain'),
-    'insert_into_item'      => __('Insert into item', 'text_domain'),
-    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
-    'items_list'            => __('Items list', 'text_domain'),
-    'items_list_navigation' => __('Items list navigation', 'text_domain'),
-    'filter_items_list'     => __('Filter items list', 'text_domain'),
-  );
-  $rewrite = array(
-    'slug'                  => 'eventos',
-    'with_front'            => true,
-    'pages'                 => true,
-    'feeds'                 => true,
-  );
-  $args = array(
-    'label'                 => __('Evento', 'text_domain'),
-    'description'           => __('eventos de AMASFAC', 'text_domain'),
-    'labels'                => $labels,
-    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
-    'taxonomies'            => array(),
-    'hierarchical'          => true,
-    'public'                => true,
-    'show_ui'               => true,
-    'show_in_menu'          => true,
-    'menu_position'         => 2,
-    'show_in_admin_bar'     => true,
-    'show_in_nav_menus'     => true,
-    'can_export'            => true,
-    'has_archive'           => true,
-    'exclude_from_search'   => false,
-    'publicly_queryable'    => true,
-    'rewrite'               => $rewrite,
-    'capability_type'       => 'post',
-    'show_in_rest'          => true,
-    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
-  );
-  register_post_type('events', $args);
-}
-add_action('init', 'custom_post_type_events', 0);
 
 
-function custom_post_type_bannerHome()
-{
-
-  $labels = array(
-    'name'                  => _x('bannerHome', 'Post Type General Name', 'text_domain'),
-    'singular_name'         => _x('bannerHome', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('bannerHome', 'text_domain'),
-    'name_admin_bar'        => __('bannerHome', 'text_domain'),
-    'archives'              => __('Item Archives', 'text_domain'),
-    'attributes'            => __('Item Attributes', 'text_domain'),
-    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
-    'all_items'             => __('All Items', 'text_domain'),
-    'add_new_item'          => __('Add New Item', 'text_domain'),
-    'add_new'               => __('Add New', 'text_domain'),
-    'new_item'              => __('New Item', 'text_domain'),
-    'edit_item'             => __('Edit Item', 'text_domain'),
-    'update_item'           => __('Update Item', 'text_domain'),
-    'view_item'             => __('View Item', 'text_domain'),
-    'view_items'            => __('View Items', 'text_domain'),
-    'search_items'          => __('Search Item', 'text_domain'),
-    'not_found'             => __('Not found', 'text_domain'),
-    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-    'featured_image'        => __('Featured Image', 'text_domain'),
-    'set_featured_image'    => __('Set featured image', 'text_domain'),
-    'remove_featured_image' => __('Remove featured image', 'text_domain'),
-    'use_featured_image'    => __('Use as featured image', 'text_domain'),
-    'insert_into_item'      => __('Insert into item', 'text_domain'),
-    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
-    'items_list'            => __('Items list', 'text_domain'),
-    'items_list_navigation' => __('Items list navigation', 'text_domain'),
-    'filter_items_list'     => __('Filter items list', 'text_domain'),
-  );
-  $rewrite = array(
-    'slug'                  => 'bannerHome',
-    'with_front'            => true,
-    'pages'                 => true,
-    'feeds'                 => true,
-  );
-  $args = array(
-    'label'                 => __('bannerHome', 'text_domain'),
-    'description'           => __('bannerHome', 'text_domain'),
-    'labels'                => $labels,
-    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
-    'taxonomies'            => array(),
-    'hierarchical'          => true,
-    'public'                => true,
-    'show_ui'               => true,
-    'show_in_menu'          => true,
-    'menu_position'         => 2,
-    'show_in_admin_bar'     => true,
-    'show_in_nav_menus'     => true,
-    'can_export'            => true,
-    'has_archive'           => true,
-    'exclude_from_search'   => false,
-    'publicly_queryable'    => true,
-    'rewrite'               => $rewrite,
-    'capability_type'       => 'post',
-    'show_in_rest'          => true,
-    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
-  );
-  register_post_type('bannerHome', $args);
-}
-add_action('init', 'custom_post_type_bannerHome', 0);
 
 function custom_post_type_queHacemos()
 {
@@ -868,7 +742,7 @@ function custom_post_type_queHacemos()
   $labels = array(
     'name'                  => _x('queHacemos', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('queHacemos', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('queHacemos', 'text_domain'),
+    'menu_name'             => __('sección_que_hacemos', 'text_domain'),
     'name_admin_bar'        => __('queHacemos', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -932,7 +806,7 @@ function custom_post_type_hacemosTrabajoCon()
   $labels = array(
     'name'                  => _x('hacemosTrabajoCon', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('hacemosTrabajoCon', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('hacemosTrabajoCon', 'text_domain'),
+    'menu_name'             => __('seccion_hemos_trabajo_con', 'text_domain'),
     'name_admin_bar'        => __('hacemosTrabajoCon', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -996,7 +870,7 @@ function custom_post_type_hacemosParteDe()
   $labels = array(
     'name'                  => _x('hacemosParteDe', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('hacemosParteDe', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('hacemosParteDe', 'text_domain'),
+    'menu_name'             => __('seccion_hacemos_Parte_De', 'text_domain'),
     'name_admin_bar'        => __('hacemosParteDe', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1060,7 +934,7 @@ function custom_post_type_quienesSomos()
   $labels = array(
     'name'                  => _x('quienesSomos', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('quienesSomos', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('quienesSomos', 'text_domain'),
+    'menu_name'             => __('seccion_quienes_Somos', 'text_domain'),
     'name_admin_bar'        => __('quienesSomos', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1124,7 +998,7 @@ function custom_post_type_nuestroAdn()
   $labels = array(
     'name'                  => _x('nuestroAdn', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('nuestroAdn', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('nuestroAdn', 'text_domain'),
+    'menu_name'             => __('seccion_nuestro_Adn', 'text_domain'),
     'name_admin_bar'        => __('nuestroAdn', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1188,7 +1062,7 @@ function custom_post_type_nuestroInpacto()
   $labels = array(
     'name'                  => _x('nuestroInpacto', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('nuestroInpacto', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('nuestroInpacto', 'text_domain'),
+    'menu_name'             => __('seccion_nuestro_Inpacto', 'text_domain'),
     'name_admin_bar'        => __('nuestroInpacto', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1252,7 +1126,7 @@ function custom_post_type_weMake()
   $labels = array(
     'name'                  => _x('weMake', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('weMake', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('weMake', 'text_domain'),
+    'menu_name'             => __('seccion_nosotros_hacemos', 'text_domain'),
     'name_admin_bar'        => __('weMake', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1316,7 +1190,7 @@ function custom_post_type_cardsProjects()
   $labels = array(
     'name'                  => _x('cardsProjects', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('cardsProjects', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('cardsProjects', 'text_domain'),
+    'menu_name'             => __('listado_cards_proyectos  ', 'text_domain'),
     'name_admin_bar'        => __('cardsProjects', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1380,7 +1254,7 @@ function custom_post_type_readyPrograms()
   $labels = array(
     'name'                  => _x('readyPrograms', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('readyPrograms', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('readyPrograms', 'text_domain'),
+    'menu_name'             => __('listado_de_cards_programas', 'text_domain'),
     'name_admin_bar'        => __('readyPrograms', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1444,7 +1318,7 @@ function custom_post_type_mostRecentProjects()
   $labels = array(
     'name'                  => _x('mostRecentProjects', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('mostRecentProjects', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('mostRecentProjects', 'text_domain'),
+    'menu_name'             => __('listado_de_proyectos_recientes', 'text_domain'),
     'name_admin_bar'        => __('mostRecentProjects', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1508,8 +1382,8 @@ function custom_post_type_banners()
   $labels = array(
     'name'                  => _x('banners', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('banners', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('banners', 'text_domain'),
-    'name_admin_bar'        => __('banners', 'text_domain'),
+    'menu_name'             => __('titulos_banners', 'text_domain'),
+    'name_admin_bar'        => __('titulos_banners', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
     'parent_item_colon'     => __('Parent Item:', 'text_domain'),
@@ -1572,7 +1446,7 @@ function custom_post_type_cardsSkills()
   $labels = array(
     'name'                  => _x('cardsSkills', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('cardsSkills', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('cardsSkills', 'text_domain'),
+    'menu_name'             => __('listado_de_cards_habilidades', 'text_domain'),
     'name_admin_bar'        => __('cardsSkills', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1636,7 +1510,7 @@ function custom_post_type_ejesTematicos()
   $labels = array(
     'name'                  => _x('ejesTematicos', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('ejesTematicos', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('ejesTematicos', 'text_domain'),
+    'menu_name'             => __('listado_de_ejes_Tematicos', 'text_domain'),
     'name_admin_bar'        => __('ejesTematicos', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1699,7 +1573,7 @@ function custom_post_type_tabsPrincipios()
   $labels = array(
     'name'                  => _x('tabsPrincipios', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('tabsPrincipios', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('tabsPrincipios', 'text_domain'),
+    'menu_name'             => __('listados_tabs_de_Principios', 'text_domain'),
     'name_admin_bar'        => __('tabsPrincipios', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1762,7 +1636,7 @@ function custom_post_type_cardPrograms()
   $labels = array(
     'name'                  => _x('cardPrograms', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('cardPrograms', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('cardPrograms', 'text_domain'),
+    'menu_name'             => __('listado_card_de_Programs', 'text_domain'),
     'name_admin_bar'        => __('cardPrograms', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1825,7 +1699,7 @@ function custom_post_type_weSeek()
   $labels = array(
     'name'                  => _x('weSeek', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('weSeek', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('weSeek', 'text_domain'),
+    'menu_name'             => __('seccion_buscamos_hacer', 'text_domain'),
     'name_admin_bar'        => __('weSeek', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1888,7 +1762,7 @@ function custom_post_type_components()
   $labels = array(
     'name'                  => _x('components', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('components', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('components', 'text_domain'),
+    'menu_name'             => __('listado_de_componentes', 'text_domain'),
     'name_admin_bar'        => __('components', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -1951,7 +1825,7 @@ function custom_post_type_youCanAchieve()
   $labels = array(
     'name'                  => _x('youCanAchieve', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('youCanAchieve', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('youCanAchieve', 'text_domain'),
+    'menu_name'             => __('seccion_puedes_lograr', 'text_domain'),
     'name_admin_bar'        => __('youCanAchieve', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2014,7 +1888,7 @@ function custom_post_type_CardAchieve()
   $labels = array(
     'name'                  => _x('CardAchieve', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('CardAchieve', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('CardAchieve', 'text_domain'),
+    'menu_name'             => __('listado_card_conocer_mas', 'text_domain'),
     'name_admin_bar'        => __('CardAchieve', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2077,7 +1951,7 @@ function custom_post_type_aprenderApromover()
   $labels = array(
     'name'                  => _x('aprenderApromover', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('aprenderApromover', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('aprenderApromover', 'text_domain'),
+    'menu_name'             => __('seccion_aprender_A_promover', 'text_domain'),
     'name_admin_bar'        => __('aprenderApromover', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2140,7 +2014,7 @@ function custom_post_type_redesSociales()
   $labels = array(
     'name'                  => _x('redesSociales', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('redesSociales', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('redesSociales', 'text_domain'),
+    'menu_name'             => __('listado_de_redes_Sociales', 'text_domain'),
     'name_admin_bar'        => __('redesSociales', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2267,7 +2141,7 @@ function custom_post_type_comite_directivo()
   $labels = array(
     'name'                  => _x('comite_directivo', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('comite_directivo', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('comite_directivo', 'text_domain'),
+    'menu_name'             => __('listado_comite_directivo', 'text_domain'),
     'name_admin_bar'        => __('comite_directivo', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2330,7 +2204,7 @@ function custom_post_type_equipo_consultor()
   $labels = array(
     'name'                  => _x('equipo_consultor', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('equipo_consultor', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('equipo_consultor', 'text_domain'),
+    'menu_name'             => __('listado_equipo_consultor', 'text_domain'),
     'name_admin_bar'        => __('equipo_consultor', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2393,7 +2267,7 @@ function custom_post_type_programs_view()
   $labels = array(
     'name'                  => _x('programs_view', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('programs_view', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('programs_view', 'text_domain'),
+    'menu_name'             => __('listado_programs_view', 'text_domain'),
     'name_admin_bar'        => __('programs_view', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2457,7 +2331,7 @@ function custom_post_type_recurso_recursos()
   $labels = array(
     'name'                  => _x('recurso_recursos', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('recurso_recursos', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('recurso_recursos', 'text_domain'),
+    'menu_name'             => __('listado_de_recursos_filtros', 'text_domain'),
     'name_admin_bar'        => __('recurso_recursos', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2519,7 +2393,7 @@ function custom_post_type_recursos_tematicas()
   $labels = array(
     'name'                  => _x('recursos_tematicas', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('recursos_tematicas', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('recursos_tematicas', 'text_domain'),
+    'menu_name'             => __('listado_de_tematicas_filtros', 'text_domain'),
     'name_admin_bar'        => __('recursos_tematicas', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2582,7 +2456,7 @@ function custom_post_type_recursos_cards()
   $labels = array(
     'name'                  => _x('recursos_cards', 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x('recursos_cards', 'Post Type Singular Name', 'text_domain'),
-    'menu_name'             => __('recursos_cards', 'text_domain'),
+    'menu_name'             => __('listado_de_cards_de_recursos', 'text_domain'),
     'name_admin_bar'        => __('recursos_cards', 'text_domain'),
     'archives'              => __('Item Archives', 'text_domain'),
     'attributes'            => __('Item Attributes', 'text_domain'),
@@ -2639,3 +2513,197 @@ function custom_post_type_recursos_cards()
   register_post_type('recursos_cards', $args);
 }
 add_action('init', 'custom_post_type_recursos_cards', 0);
+
+
+
+function custom_post_type_titles_seccion_home()
+{
+  $labels = array(
+    'name'                  => _x('titles_seccion_home', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('titles_seccion_home', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('titulos_en_seccion_home', 'text_domain'),
+    'name_admin_bar'        => __('titles_seccion_home', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'titles_seccion_home',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('titles_seccion_home', 'text_domain'),
+    'description'           => __('titles_seccion_home', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array('category', 'post_tag'),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('titles_seccion_home', $args);
+}
+add_action('init', 'custom_post_type_titles_seccion_home', 0);
+
+
+
+function custom_post_type_equipo_nacional()
+{
+  $labels = array(
+    'name'                  => _x('equipo_nacional', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('equipo_nacional', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('listado_equipo_nacional', 'text_domain'),
+    'name_admin_bar'        => __('equipo_nacional', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'equipo_nacional',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('equipo_nacional', 'text_domain'),
+    'description'           => __('equipo_nacional', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('equipo_nacional', $args);
+}
+add_action('init', 'custom_post_type_equipo_nacional', 0);
+
+
+function custom_post_type_equipo_regional()
+{
+  $labels = array(
+    'name'                  => _x('equipo_regional', 'Post Type General Name', 'text_domain'),
+    'singular_name'         => _x('equipo_regional', 'Post Type Singular Name', 'text_domain'),
+    'menu_name'             => __('listado_equipo_regional', 'text_domain'),
+    'name_admin_bar'        => __('equipo_regional', 'text_domain'),
+    'archives'              => __('Item Archives', 'text_domain'),
+    'attributes'            => __('Item Attributes', 'text_domain'),
+    'parent_item_colon'     => __('Parent Item:', 'text_domain'),
+    'all_items'             => __('All Items', 'text_domain'),
+    'add_new_item'          => __('Add New Item', 'text_domain'),
+    'add_new'               => __('Add New', 'text_domain'),
+    'new_item'              => __('New Item', 'text_domain'),
+    'edit_item'             => __('Edit Item', 'text_domain'),
+    'update_item'           => __('Update Item', 'text_domain'),
+    'view_item'             => __('View Item', 'text_domain'),
+    'view_items'            => __('View Items', 'text_domain'),
+    'search_items'          => __('Search Item', 'text_domain'),
+    'not_found'             => __('Not found', 'text_domain'),
+    'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
+    'featured_image'        => __('Featured Image', 'text_domain'),
+    'set_featured_image'    => __('Set featured image', 'text_domain'),
+    'remove_featured_image' => __('Remove featured image', 'text_domain'),
+    'use_featured_image'    => __('Use as featured image', 'text_domain'),
+    'insert_into_item'      => __('Insert into item', 'text_domain'),
+    'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
+    'items_list'            => __('Items list', 'text_domain'),
+    'items_list_navigation' => __('Items list navigation', 'text_domain'),
+    'filter_items_list'     => __('Filter items list', 'text_domain'),
+  );
+  $rewrite = array(
+    'slug'                  => 'equipo_regional',
+    'with_front'            => true,
+    'pages'                 => true,
+    'feeds'                 => true,
+  );
+  $args = array(
+    'label'                 => __('equipo_regional', 'text_domain'),
+    'description'           => __('equipo_regional', 'text_domain'),
+    'labels'                => $labels,
+    'supports'              => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'excerpt'),
+    'taxonomies'            => array(),
+    'hierarchical'          => true,
+    'public'                => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'menu_position'         => 2,
+    'show_in_admin_bar'     => true,
+    'show_in_nav_menus'     => true,
+    'can_export'            => true,
+    'has_archive'           => true,
+    'exclude_from_search'   => false,
+    'publicly_queryable'    => true,
+    'rewrite'               => $rewrite,
+    'capability_type'       => 'post',
+    'show_in_rest'          => true,
+    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+  );
+  register_post_type('equipo_regional', $args);
+}
+add_action('init', 'custom_post_type_equipo_regional', 0);

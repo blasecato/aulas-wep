@@ -143,6 +143,7 @@
           border-radius: 24px;
           width: 332px;
           margin-bottom: 40px;
+          max-height: 550px;
           .see-more {
             justify-content: center;
           }
@@ -150,6 +151,8 @@
             background: #719f59;
             border-radius: 24px 24px 0px 0px;
             padding: 24px;
+            height: 300px;
+            position: relative;
             .title-type {
               font-family: "Roboto";
               font-style: normal;
@@ -167,12 +170,14 @@
               font-size: 30px;
               line-height: 35px;
               color: #ffffff;
-              margin-bottom: 50px;
+              // margin-bottom: 50px;
             }
             .head-bottom {
               display: flex;
               align-items: flex-end;
               justify-content: space-between;
+              position: absolute;
+              bottom: 20px;
               img {
                 max-width: 140px !important;
                 max-height: 115px !important;
@@ -230,6 +235,11 @@
               line-height: 160%;
               color: #162c3d;
               margin-bottom: 16px;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 3; /* number of lines to show */
+                      line-clamp: 3; 
+              -webkit-box-orient: vertical;
             }
             .see-more {
               font-family: $Raleway;
